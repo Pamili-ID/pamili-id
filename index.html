@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PaMiLY ID</title>
+
+  <!-- FONT -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jockey+One&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style/styles.css" />
+</head>
+
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar">
+    <div class="logo">PaMiLY ID</div>
+
+    <input type="text" class="search" id="searchInput" placeholder="Search user / post..." />
+
+    <div class="nav-actions">
+      <div class="nav-profile" id="profileArea">
+        <span id="navNickname">Loading</span>
+        <img id="navAvatar" />
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== PROFILE DROPDOWN ===== -->
+  <div class="profile-menu" id="profileMenu">
+    <button id="myProfileBtn">Profile</button>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <!-- ===== UPLOAD POST ===== -->
+  <!-- ===== FLOATING ADD POST BUTTON ===== -->
+  <button class="fab-post fab-sm" title="Tambah Postingan" id="openPost">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" />
+    </svg>
+  </button>
+
+  <!-- ===== MAIN ===== -->
+  <main class="layout">
+    <!-- ===== FEED ===== -->
+    <section class="feed-section">
+      <nav class="feed-tabs">
+        <button class="active">Warkop</button>
+        <button>Diikuti</button>
+        <button>Teman</button>
+        <button>Komunitas</button>
+      </nav>
+
+      <div id="feed"></div>
+    </section>
+
+    <!-- ===== SIDEBAR ===== -->
+    <aside class="side-section">
+      <!-- INFO / SCROLL -->
+      <div class="auto-scroll">
+        <div class="scroll-content">
+          <div class="container">
+            <div class="card"><iMg src="src/img/background_hantu.png"></iMg></div>
+            <div class="card"><iMg src="src/img/ratingku.jpeg"></iMg></div>
+            <div class="card"><iMg src="src/img/white.jpeg"></iMg></div>
+            <div class="card"><iMg src="src/img/kkk.jpeg"></iMg></div>
+          </div>
+          <div class="container">
+            <div class="card"><iMg src="src/img/background_hantu.png"></iMg></div>
+            <div class="card"><iMg src="src/img/ratingku.jpeg"></iMg></div>
+            <div class="card"><iMg src="src/img/white.jpeg"></iMg></div>
+            <div class="card"><iMg src="src/img/kkk.jpeg"></iMg></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== FRIEND REQUEST ===== -->
+      <div>
+        <h4>Pengikut terbaru</h4>
+        <div id="friendRequests" class="side-scroll"></div>
+      </div>
+
+      <!-- ===== REKOMENDASI TEMAN ===== -->
+      <div>
+        <h4>Rekomendasi Teman</h4>
+        <div id="recommendList"></div>
+      </div>
+
+      <!-- ===== COMMUNITY REQUESTS ===== -->
+      <div>
+        <h4>Community Requests</h4>
+        <div id="communityRequestList" class="side-scroll"></div>
+      </div>
+
+      <!-- ===== FRIEND LIST ===== -->
+      <div>
+        <h4>Friend List</h4>
+        <div id="friendList" class="side-scroll"></div>
+      </div>
+
+      <div class="sidebar-contact">
+        <h3>TENTANG</h3>
+        <h4>Kontak Admin</h4>
+        <div class="contact-item">GitHub: @pamili-id</div>
+        <div class="contact-item">Facebook: PaMiLY ID</div>
+        <div class="contact-item">Instagram: @pamili.id</div>
+        <div class="contact-item">Email: admin@pamili.id</div>
+      </div>
+
+      <div class="footer">© 2026 PaMiLY ID</div>
+    </aside>
+  </main>
+
+  <!-- ===== UPLOAD MODAL ===== -->
+  <div class="modal" id="postModal">
+    <div class="modal-content">
+      <h3>Buat Postingan</h3>
+
+      <textarea id="postText" placeholder="Tulis sesuatu..."></textarea>
+
+      <button id="fileBtn">Pilih Gambar</button>
+      <input type="file" id="fileInput" accept="image/*" multiple hidden />
+
+      <div id="imagePreview" style="display: none">
+        <div class="preview-row" id="previewRow"></div>
+        <button id="removeImage">Hapus Semua</button>
+      </div>
+
+      <div class="modal-actions">
+        <button id="submitPost">Post</button>
+        <button id="closePost">Batal</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE PREVIEW MODAL -->
+  <div class="image-modal" id="imageModal">
+    <img id="imageModalImg" />
+  </div>
+
+  <!-- ===== JS MODULES ===== -->
+  <script type="module" src="backend/index/app.js"></script>
+</body>
+
+</html>

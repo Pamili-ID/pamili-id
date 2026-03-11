@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOGIN</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style/login.css">
+</head>
+<body>
+<div class="bg-orb orb-1"></div>
+
+<!-- ================= LOGIN CARD ================= -->
+<div class="login-card">
+  <h2>Login</h2>
+
+  <!-- LOGIN FORM -->
+  <form id="loginForm">
+    <input type="email" id="loginEmail" placeholder="Email" required>
+    <input type="password" id="loginPassword" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+
+  <button id="registerBtn" type="button">Register</button>
+
+  <div class="divider"><span>atau</span></div>
+
+  <button id="googleLogin" class="google-btn">
+    <img src="../src/img/google.png" class="google-icon">
+    Google
+  </button>
+
+  <button id="githubLogin" class="github-btn">
+    <img src="../src/img/github.png" class="github-icon">
+    GitHub
+  </button>
+</div>
+
+<!-- ================= REGISTER POPUP ================= -->
+<div class="modal" id="registerModal">
+  <div class="modal-content">
+    <h3>Register Akun</h3>
+
+    <input type="text" id="regUsername" placeholder="Username" required>
+    <input type="email" id="regEmail" placeholder="Email" required>
+    <input type="password" id="regPassword" placeholder="Password" required>
+
+    <div class="modal-actions">
+      <button id="submitRegister" type="button">Daftar</button>
+      <button id="closeModal" type="button">Batal</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= FIREBASE ================= -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, GoogleAuthProvider, GithubAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-auth.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBnE8ZLTp58Orle6vu9Rk9xJMEajCPo7PQ",
+  authDomain: "pamili-id.firebaseapp.com",
+  projectId: "pamili-id",
+  storageBucket: "pamili-id.firebasestorage.app",
+  messagingSenderId: "584922601978",
+  appId: "1:584922601978:web:6b3f226bbc5af144bbac43"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getDatabase(app);
+const googleProvider = new GoogleAuthProvider();
+const githubProvider = new GithubAuthProvider();
+const defaultAvatar = "default-avatar.png";
+
+/* ========= LOGIN ========= */
+document.getElementById("loginForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const email = document.getElementById("loginEmail").value.trim();
+  const password = document.getElementById("loginPassword").value;
+
+  try {
+    await signInWithEmailAndPassword(auth, email, password);
+    window.location.href = "../index.html";
+  } catch(err) {
+    alert("Login gagal: " + err.message);
+  }
+});
+
+/* ========= REGISTER MODAL ========= */
+const modal = document.getElementById("registerModal");
+document.getElementById("registerBtn").onclick = () => modal.style.display = "flex";
+document.getElementById("closeModal").onclick = () => modal.style.display = "none";
+
+/* ========= REGISTER MANUAL ========= */
+document.getElementById("submitRegister").addEventListener("click", async () => {
+  const username = document.getElementById("regUsername").value.trim();
+  const email = document.getElementById("regEmail").value.trim();
+  const password = document.getElementById("regPassword").value;
+
+  if (!username || !email || !password) {
+    alert("Semua field wajib diisi!");
+    return;
+  }
+
+  try {
+    const res = await createUserWithEmailAndPassword(auth, email, password);
+
+    await set(ref(db, "users/" + res.user.uid), {
+      username: username,
+      email: email,
+      provider: "manual",
+      avatar: defaultAvatar,
+      online: true
+    });
+
+    document.getElementById("regUsername").value = "";
+    document.getElementById("regEmail").value = "";
+    document.getElementById("regPassword").value = "";
+
+    alert("Registrasi berhasil!");
+    modal.style.display = "none";
+    window.location.href = "../index.html";
+  } catch(err) {
+    alert("Register gagal: " + err.message);
+  }
+});
+
+/* ========= GOOGLE LOGIN ========= */
+document.getElementById("googleLogin").onclick = async () => {
+  try {
+    const res = await signInWithPopup(auth, googleProvider);
+
+    await set(ref(db, "users/" + res.user.uid), {
+      username: res.user.displayName || "Google User",
+      email: res.user.email,
+      provider: "google",
+      avatar: res.user.photoURL || defaultAvatar,
+      online: true
+    });
+
+    window.location.href = "../index.html";
+  } catch(err) {
+    alert(err.message);
+  }
+};
+
+/* ========= GITHUB LOGIN ========= */
+document.getElementById("githubLogin").onclick = async () => {
+  try {
+    const res = await signInWithPopup(auth, githubProvider);
+    const user = res.user;
+
+    await set(ref(db, "users/" + user.uid), {
+      username: user.displayName || "GitHub User",
+      email: user.email || "",
+      provider: "github",
+      avatar: user.photoURL || defaultAvatar,
+      online: true
+    });
+
+    window.location.href = "index.html";
+  } catch(err) {
+    alert("Login GitHub gagal: " + err.message);
+  }
+};
+</script>
+
+</body>
+</html>

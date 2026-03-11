@@ -1,0 +1,419 @@
+/* ===== RESET & DASAR ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  color: #1b1b1b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: url("../src/img/background_paus.png") no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* ===== VIDEO BACKGROUND ===== */
+#bgVideo {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* ===== LOGIN CARD ===== */
+.login-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 360px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(10, 20, 40, 0.35);
+  animation: glassShatter 1s ease-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+
+/* ===== ANIMASI ===== */
+@keyframes glassShatter {
+  0% { transform: scale(0.6); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.login-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    rgba(255,255,255,0.05),
+    rgba(255,255,255,0.05) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  pointer-events: none;
+  animation: shatterMove 3s linear infinite;
+  border-radius: 20px;
+}
+
+@keyframes shatterMove {
+  0% { transform: rotate(0deg) translate(0,0); }
+  50% { transform: rotate(180deg) translate(10px,10px); }
+  100% { transform: rotate(360deg) translate(0,0); }
+}
+
+/* ===== FORM ===== */
+.login-card h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #f7fbff;
+  letter-spacing: 1px;
+  font-family: 'Satisfy', cursive;
+}
+
+.login-card form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.login-card input {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.login-card input:focus {
+  box-shadow: 0 0 0 3px rgba(78, 124, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+/* ===== TOMBOL ===== */
+.login-card button[type="submit"],
+#registerBtn {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 10px;
+  background-color: #4e7cff;
+  color: #ffffff;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 100%;
+  box-shadow: 0 10px 24px rgba(78, 124, 255, 0.35);
+}
+.login-card button[type="submit"]:hover,
+#registerBtn:hover {
+  background-color: #6b8dff;
+  transform: translateY(-1px);
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  color: rgba(255, 255, 255, 0.7);
+  width: 100%;
+}
+.divider span {
+  flex: 1;
+  text-align: center;
+  font-size: 14px;
+}
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.25);
+  margin: 0 10px;
+}
+
+/* ===== GOOGLE BUTTON ===== */
+.google-btn {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background-color: #fff;
+  color: #333;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
+
+.google-btn:hover {
+  background-color: #f5f5f5;
+  transform: scale(1.03);
+}
+
+.google-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.github-btn {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background-color: #e7eef7;
+  color: #2f3e4e;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+  margin-top: 10px;
+}
+
+.github-btn:hover {
+  background-color: #d9e4f1;
+  transform: scale(1.03);
+}
+
+.github-icon {
+  width: 22px;
+  height: 22px;
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 600px) {
+  body, html {
+    overflow: auto;
+    align-items: flex-start;
+    padding-top: 60px;
+  }
+
+  .login-card {
+    width: 90%;
+    padding: 28px;
+    box-shadow: 0 0 20px rgba(245,230,190,0.3);
+  }
+
+  .login-card h2 {
+    font-size: 20px;
+  }
+
+  .login-card input,
+  .login-card button {
+    font-size: 15px;
+    padding: 11px;
+  }
+
+  .google-btn {
+    font-size: 14px;
+    gap: 8px;
+  }
+
+  .google-icon {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Loader */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 10, 15, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  color: #fff;
+  font-family: "Poppins", sans-serif;
+  animation: fadeIn 0.3s ease;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255,255,255,0.2);
+  border-top: 5px solid #00aaff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== MODAL OVERLAY (LEMBUT) ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 20, 40, 0.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* ===== MODAL BOX ===== */
+.modal-content {
+  width: 340px;
+  padding: 28px 26px;
+  border-radius: 18px;
+  background: rgba(248, 250, 255, 0.92);
+  box-shadow: 0 18px 40px rgba(15, 30, 60, 0.25);
+  text-align: center;
+  animation: modalIn 0.3s ease;
+}
+
+/* ===== TITLE ===== */
+.modal-content h3 {
+  font-size: 20px;
+  margin-bottom: 18px;
+  color: #2f3e4e;
+  font-weight: 600;
+}
+
+/* ===== INPUT ===== */
+.modal-content input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  border: 1px solid #c7d1db;
+  outline: none;
+  font-size: 15px;
+  background: #ffffff;
+  color: #2f3e4e;
+  transition: 0.25s;
+}
+
+.modal-content input:focus {
+  border-color: #8fbcd4;
+  box-shadow: 0 0 0 2px rgba(143,188,212,0.35);
+}
+
+/* ===== ACTIONS ===== */
+.modal-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.modal-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+/* Tombol Daftar */
+#submitRegister {
+  background: #8fbcd4;
+  color: #1f2f3f;
+}
+
+#submitRegister:hover {
+  background: #a5cfe5;
+}
+
+/* Tombol Batal */
+#closeModal {
+  background: #e4e8ec;
+  color: #445566;
+}
+
+#closeModal:hover {
+  background: #d6dce2;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes modalIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== BACKGROUND ORBS ===== */
+.bg-orb {
+  position: fixed;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(78, 124, 255, 0.22), transparent 65%);
+  filter: blur(1px);
+  opacity: 0.35;
+  z-index: -2;
+  animation: floatOrb 38s ease-in-out infinite;
+}
+
+.orb-1 {
+  top: -120px;
+  left: -80px;
+}
+
+@keyframes floatOrb {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(10px) translateX(-6px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 600px) {
+  .modal-content {
+    width: 90%;
+    padding: 24px 22px;
+  }
+}
+
+/* ===== FONT TITLE ===== */
+@font-face {
+  font-family: "pamili-font";
+  src: url("../src/font/Impact.ttf") format("woff2"),
+       url("../src/font/Impact.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.title {
+  font-family: "pamili-font";
+}

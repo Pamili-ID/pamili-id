@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Profile | PaMiLY ID</title>
+  <link rel="stylesheet" href="../style/profile.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- ===== MINI NAVIGATION ===== -->
+<nav class="glass-nav">
+<a href="../index.html">
+  <button class="glass-btn is-blue size-sm" title="Home">
+    <svg viewBox="0 0 24 24">
+      <path d="M12 3l9 8h-3v9h-5v-6H11v6H6v-9H3z"/>
+    </svg>
+  </button>
+</nav>
+</a>
+
+<div class="profile-page">
+
+  <!-- PROFILE HEADER -->
+  <div class="profile-header">
+    <div class="profile-card">
+
+      <img id="proAvatar" class="profile-avatar" src="default-avatar.png">
+
+      <div class="profile-meta">
+        <h2 id="proUsername">Username</h2>
+        <span id="proNickname">@nickname</span>
+        <p id="proBio">no bio yet</p>
+      </div>
+
+      <div class="profile-stats">
+        <div>
+          <b id="postCount">0</b>
+          <span>Post</span>
+        </div>
+        <div>
+          <b id="followingCount">0</b>
+          <span>Mengikuti</span>
+        </div>
+        <div>
+          <b id="followerCount">0</b>
+          <span>Diikuti</span>
+        </div>
+        <div>
+          <b id="likeCount">0</b>
+          <span>Disukai</span>
+        </div>
+      </div>
+
+      <div class="profile-actions">
+        <button id="followBtn" class="btn-add primary">loading</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- PROFILE MENU -->
+<div class="profile-menu">
+  <div class="menu-card">
+
+    <button class="menu-item active" id="btnPosts">
+      Postings
+    </button>
+
+    <button class="menu-item" id="btnCommunities">
+      Komunitas
+    </button>
+
+    <button class="menu-item" id="btnSettings">
+      Settings
+    </button>
+
+  </div>
+</div>
+
+<!-- PROFILE CONTENT (DINAMIS) -->
+<div class="profile-body">
+
+  <!-- KONTEN KIRI (DINAMIS) -->
+  <div class="profile-section" id="profileSection">
+    <p class="empty-text">Pilih menu</p>
+  </div>
+
+  <!-- FRIEND LIST KANAN -->
+  <aside class="friend-box">
+    <h3>Friend List</h3>
+
+    <div class="friend-list" id="friendList">
+      <p class="empty-text">Belum ada teman</p>
+    </div>
+  </aside>
+
+</div>
+
+<script type="module" src="../backend/profile/app.js"></script>
+</body>
+</html>
